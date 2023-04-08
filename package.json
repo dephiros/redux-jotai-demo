@@ -1,0 +1,28 @@
+{
+  "name": "vite-preact-ts-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "jotai": "^2.0.3",
+    "jotai-location": "^0.5.1",
+    "preact": "^10.13.1",
+    "preact-compat": "^3.19.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "reselect": "^4.1.7",
+    "twind": "^0.16.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@preact/preset-vite": "^2.5.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.1"
+  }
+}
