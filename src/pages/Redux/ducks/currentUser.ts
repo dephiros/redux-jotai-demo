@@ -23,7 +23,7 @@ export function reducer(state: any, action: any) {
 function getUser() {
   return Promise.resolve({
     id: 0,
-    name: 'root',
+    name: 'Catalina Arroyo',
     avatar: 'https://i.pravatar.cc/300',
   });
 }
