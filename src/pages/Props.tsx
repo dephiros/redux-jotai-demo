@@ -1,7 +1,7 @@
-import { currentTimeAtom } from '../store';
-import { FlashyBox, getColor } from '../components/FlashyBox';
-import { RecursiveComponent } from '../components/RecursiveComponent';
-import { useAtomValue } from 'jotai';
+import { currentTimeAtom } from "../store";
+import { FlashyBox, getColor } from "../components/FlashyBox";
+import { RecursiveComponent } from "../components/RecursiveComponent";
+import { useAtomValue } from "jotai";
 
 export default function Page() {
   return (

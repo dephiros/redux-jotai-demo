@@ -1,5 +1,5 @@
-import { ComponentChildren } from 'preact';
-import { useRef, useEffect } from 'preact/hooks';
+import { ComponentChildren } from "preact";
+import { useRef, useEffect } from "preact/hooks";
 const MIN_HUE = 0;
 const MAX_HUE = 250;
 
@@ -13,7 +13,7 @@ export function getColor(
 
 export function FlashyBox({
   children,
-  color = 'hotpink',
+  color = "hotpink",
 }: {
   children: ComponentChildren;
   color?: string;
@@ -25,8 +25,8 @@ export function FlashyBox({
     if (container) {
       container.animate(
         [
-          { backgroundColor: color, easing: 'ease-out' },
-          { backgroundColor: 'transparent', easing: 'ease-in' },
+          { backgroundColor: color, easing: "ease-out" },
+          { backgroundColor: "transparent", easing: "ease-in" },
         ],
         {
           duration: 2000,
@@ -37,12 +37,12 @@ export function FlashyBox({
   return (
     <div
       style={{
-        padding: '0.5rem',
-        border: '1px solid grey',
-        diplay: 'flex',
-        margin: '0.5rem',
-        flexDirection: 'row',
-        flexBasis: '100%',
+        padding: "0.5rem",
+        border: "1px solid grey",
+        diplay: "flex",
+        margin: "0.5rem",
+        flexDirection: "row",
+        flexBasis: "100%",
       }}
       ref={containerRef}
     >

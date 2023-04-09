@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { tw } from 'twind';
-import { getUserAvatar, getCurrentUserName } from '../selectors/User';
+import { connect } from "react-redux";
+import { tw } from "twind";
+import { getUserAvatar, getCurrentUserName } from "../selectors/user";
 
 function Header({ avatar, name }) {
   return (

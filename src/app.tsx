@@ -1,8 +1,8 @@
-import { Suspense } from 'preact/compat';
-import { useAtom } from 'jotai';
-import { tw } from 'twind';
+import { Suspense } from "preact/compat";
+import { useAtom } from "jotai";
+import { tw } from "twind";
 
-import routerAtom, { ROUTES } from './router';
+import routerAtom, { ROUTES } from "./router";
 
 export function App() {
   const [PageComponent, setPage] = useAtom(routerAtom);

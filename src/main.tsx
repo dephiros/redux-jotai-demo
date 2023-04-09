@@ -1,8 +1,8 @@
-import { Suspense } from 'preact/compat';
-import { render } from 'preact';
-import { App } from './app';
-import { setup } from 'twind';
-import * as colors from 'twind/colors';
+import { Suspense } from "preact/compat";
+import { render } from "preact";
+import { App } from "./app";
+import { setup } from "twind";
+import * as colors from "twind/colors";
 
 setup({
   theme: {
@@ -12,11 +12,11 @@ setup({
   },
 });
 
-import './index.css';
+import "./index.css";
 
 render(
   <Suspense fallback="loading...">
     <App />
   </Suspense>,
-  document.getElementById('app') as HTMLElement
+  document.getElementById("app") as HTMLElement
 );

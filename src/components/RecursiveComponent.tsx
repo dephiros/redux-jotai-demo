@@ -1,7 +1,7 @@
-import { JSX } from 'preact';
-import { FlashyBox, getColor } from './FlashyBox';
-import { Atom, useAtomValue } from 'jotai';
-import { currentTimeAtom } from '../store';
+import { JSX } from "preact";
+import { FlashyBox, getColor } from "./FlashyBox";
+import { Atom, useAtomValue } from "jotai";
+import { currentTimeAtom } from "../store";
 
 export function AtomComponent(): JSX.Element {
   const value = useAtomValue(currentTimeAtom);
