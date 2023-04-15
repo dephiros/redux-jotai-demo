@@ -12,7 +12,7 @@ export function getColor(
   return `hsl(${hue}, 50%, 50%)`;
 }
 
-export function FlashyBox({
+export default function FlashyBox({
   children,
   color = "hotpink",
   className,
@@ -26,15 +26,9 @@ export function FlashyBox({
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.animate(
-        [
-          { backgroundColor: color, easing: "ease-out" },
-          { backgroundColor: "transparent", easing: "ease-in" },
-        ],
-        {
-          duration: 2000,
-        }
-      );
+      container.animate([{ backgroundColor: color, easing: "ease-out" }], {
+        duration: 2000,
+      });
     }
   });
   return (
