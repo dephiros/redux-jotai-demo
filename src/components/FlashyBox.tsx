@@ -1,5 +1,6 @@
 import { ComponentChildren } from "preact";
 import { useRef, useEffect } from "preact/hooks";
+import { tw } from "twind";
 const MIN_HUE = 0;
 const MAX_HUE = 250;
 
@@ -14,9 +15,11 @@ export function getColor(
 export function FlashyBox({
   children,
   color = "hotpink",
+  className,
 }: {
   children: ComponentChildren;
   color?: string;
+  className: string;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,17 +38,7 @@ export function FlashyBox({
     }
   });
   return (
-    <div
-      style={{
-        padding: "0.5rem",
-        border: "1px solid grey",
-        diplay: "flex",
-        margin: "0.5rem",
-        flexDirection: "row",
-        flexBasis: "100%",
-      }}
-      ref={containerRef}
-    >
+    <div class={tw`flex ${className}`} ref={containerRef}>
       {children}
     </div>
   );
