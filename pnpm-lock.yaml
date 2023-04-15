@@ -27,7 +27,7 @@ dependencies:
     version: 4.1.7
   twind:
     specifier: ^0.16.19
-    version: 0.16.19(typescript@5.0.3)
+    version: 0.16.19(typescript@5.0.4)
 
 devDependencies:
   '@babel/core':
@@ -42,9 +42,12 @@ devDependencies:
   prettier-plugin-tailwindcss:
     specifier: ^0.2.7
     version: 0.2.7(prettier@2.8.7)
+  redux-logger:
+    specifier: ^3.0.6
+    version: 3.0.6
   typescript:
-    specifier: ^5.0.2
-    version: 5.0.3
+    specifier: ^5.0.4
+    version: 5.0.4
   vite:
     specifier: ^4.2.1
     version: 4.2.1
@@ -701,6 +704,10 @@ packages:
       ms: 2.1.2
     dev: true
 
+  /deep-diff@0.3.8:
+    resolution: {integrity: sha512-yVn6RZmHiGnxRKR9sJb3iVV2XTF1Ghh2DiWRZ3dMnGc43yUdWWF/kX6lQyk3+P84iprfWKU/8zFTrlkvtFm1ug==}
+    dev: true
+
   /dom-serializer@1.4.1:
     resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
     dependencies:
@@ -1101,6 +1108,12 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
+  /redux-logger@3.0.6:
+    resolution: {integrity: sha512-JoCIok7bg/XpqA1JqCqXFypuqBbQzGQySrhFzewB7ThcnysTO30l4VCst86AuB9T9tuT03MAA56Jw2PNhRSNCg==}
+    dependencies:
+      deep-diff: 0.3.8
+    dev: true
+
   /redux-thunk@2.4.2(redux@4.2.1):
     resolution: {integrity: sha512-+P3TjtnP0k/FEjcBL5FZpoovtvrTNT/UXd4/sluaSyrURlSlhLSzEdfsTBW7WsKB6yPvgd7q/iZPICFjW4o57Q==}
     peerDependencies:
@@ -1175,7 +1188,7 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /twind@0.16.19(typescript@5.0.3):
+  /twind@0.16.19(typescript@5.0.4):
     resolution: {integrity: sha512-/9H7I/Xzji6UZ+x1V8/llcQSAI0bINqpZtvAqqTzuU/qAdzRCnrpaME8x57k8tUu2KbosjSQE85sSwcLBGD1DQ==}
     engines: {node: '>=10.13'}
     peerDependencies:
@@ -1187,11 +1200,11 @@ packages:
       csstype: 3.1.2
       htmlparser2: 6.1.0
       style-vendorizer: 2.2.3
-      typescript: 5.0.3
+      typescript: 5.0.4
     dev: false
 
-  /typescript@5.0.3:
-    resolution: {integrity: sha512-xv8mOEDnigb/tN9PSMTwSEqAnUvkoXMQlicOb0IUVDBSQCgBSaAAROUZYy2IcUy5qU6XajK5jjjO7TMWqBTKZA==}
+  /typescript@5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
     engines: {node: '>=12.20'}
     hasBin: true
 

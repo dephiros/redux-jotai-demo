@@ -1,11 +1,14 @@
+import { User } from "./../../../interfaces/User";
 import { Dispatch } from "redux";
 
-const INITIAL_STATE = {
-  user: {},
-  customer: {},
-};
+function getInitialState() {
+  return {
+    user: {} as Record<string, User>,
+    customer: {} as Record<string, Customer>,
+  };
+}
 
-export function reducer(state: any, action: any) {
+export function reducer(state: typeof INITIAL_STATE, action: any) {
   // this is done through utility in the real app
   switch (action.type) {
     case "updateEntity": {
@@ -22,7 +25,7 @@ export function reducer(state: any, action: any) {
       return newState;
     }
     default:
-      return { ...INITIAL_STATE, ...state };
+      return state | getInitialState();
   }
 }
 

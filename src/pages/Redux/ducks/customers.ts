@@ -1,31 +1,28 @@
 import { Dispatch } from "redux";
+
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
+import {
+  Customer,
+  CustomerState,
+  CustomerAction,
+  CustomerActionType,
+} from "../../../interfaces/Customer";
+import { getCustomers } from "../../../api/customer";
 
-const INITIAL_STATE = {
-  status: null,
-  data: null,
-};
+const getInitialState = () => ({ status: null, data: [] });
 
-export function reducer(state: any, action: any) {
+export function reducer(state: any, action: CustomerAction) {
   // this is done through utility in the real app
   switch (action.type) {
-    case "fetchUserStart": {
+    case CustomerActionType.FETCH_CUSTOMER_START: {
       return { status: "loading" };
     }
-    case "fetchUserDone": {
-      return { status: "done ", data: action.user };
+    case CustomerActionType.FETCH_CUSTOMER_START: {
+      return { status: "done ", data: action.customers };
     }
     default:
-      return { ...INITIAL_STATE, ...state };
+      return state || getInitialState();
   }
-}
-
-async function getCustomers(userId: string) {
-  const response = await import("./customers.json");
-  return response.results.map((customer) => ({
-    ...customer,
-    id: customer.id.value,
-  }));
 }
 
 export function fetchCustomersActionCreator(userId: string) {

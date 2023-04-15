@@ -1,12 +1,20 @@
 import { Dispatch } from "redux";
+
+import {
+  CurrentUserState,
+  CurrentUserAction,
+} from "./../../../interfaces/currentUser";
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
+import { getUser } from "../../../api/user";
 
-const INITIAL_STATE = {
-  status: null,
-  data: null,
-};
+function getInitialState(): CurrentUserState {
+  return {
+    status: null,
+    data: null,
+  };
+}
 
-export function reducer(state: any, action: any) {
+export function reducer(state: CurrentUserState, action: CurrentUserAction) {
   // this is done through utility in the real app
   switch (action.type) {
     case "fetchUserStart": {
@@ -16,17 +24,8 @@ export function reducer(state: any, action: any) {
       return { status: "done ", data: action.user };
     }
     default:
-      return state || { ...INITIAL_STATE };
+      return state || getInitialState();
   }
-}
-
-function getUser() {
-  return Promise.resolve({
-    id: 0,
-    name: "Catalina Arroyo",
-    avatar:
-      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairNotTooLong&accessoriesType=Kurt&hairColor=BrownDark&facialHairType=MoustacheMagnum&facialHairColor=Blonde&clotheType=GraphicShirt&clotheColor=PastelOrange&graphicType=Hola&eyeType=Side&eyebrowType=DefaultNatural&mouthType=Eating&skinColor=Yellow",
-  });
 }
 
 export function fetchCurrentUserActionCreator() {
