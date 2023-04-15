@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import { tw } from "twind";
 
 import routerAtom, { ROUTES } from "./router";
+import Loader from "./components/Loader";
 
 export function App() {
   const [PageComponent, setPage] = useAtom(routerAtom);
@@ -23,7 +24,7 @@ export function App() {
       </nav>
 
       <main class={tw`flex-1`}>
-        <Suspense fallback="loading page...">
+        <Suspense fallback={Loader}>
           <PageComponent />
         </Suspense>
       </main>

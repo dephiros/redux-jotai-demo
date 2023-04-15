@@ -1,16 +1,22 @@
-import { connect } from 'react-redux';
-import { useEffect } from 'preact/hooks';
-import { tw } from 'twind';
+import { connect } from "react-redux";
+import { useEffect } from "preact/hooks";
+import { tw } from "twind";
 
-import { fetchCustomersActionCreator } from '../ducks/customers';
-import { getCustomers } from '../selectors/customer';
+import { fetchCustomersActionCreator } from "../ducks/customers";
+import { getCustomers, getIsCustomerLoading } from "../selectors/customer";
+import { Customer } from "../../interface/customer";
+import Loader from "../../../components/Loader";
 
 function CustomerList({
   userId,
   fetchCustomers,
   customers,
+  isCustomerLoading,
 }: {
   userId: string;
+  fetchCustomers: (userId: string) => void;
+  customers: Customer[];
+  isCustomerLoading: boolean;
 }) {
   useEffect(() => {
     fetchCustomers(userId);
@@ -20,7 +26,9 @@ function CustomerList({
     return `${customer.name.first} ${customer.name.last}`;
   }
 
-  return (
+  return isCustomerLoading ? (
+    <Loader />
+  ) : (
     <div
       class={tw`flex flex-col items-center mt-5 mx-auto text-center bg-yellow-100 text-black`}
     >
@@ -56,7 +64,10 @@ function CustomerList({
 }
 
 function mapStateToProps(state) {
-  return { customers: getCustomers(state) };
+  return {
+    customers: getCustomers(state),
+    isCustomerLoading: getIsCustomerLoading(state),
+  };
 }
 
 export default connect(mapStateToProps, {

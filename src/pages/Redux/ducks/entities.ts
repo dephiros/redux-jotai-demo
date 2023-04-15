@@ -1,14 +1,20 @@
-import { User } from "./../../../interfaces/User";
 import { Dispatch } from "redux";
 
-function getInitialState() {
+import { User } from "./../../../interfaces/User";
+import { Customer } from "./../../../interfaces/Customer";
+export interface EntityState {
+  user: Record<string, User>;
+  customer: Record<string, Customer>;
+}
+
+function getInitialState(): EntityState {
   return {
-    user: {} as Record<string, User>,
-    customer: {} as Record<string, Customer>,
+    user: {},
+    customer: {},
   };
 }
 
-export function reducer(state: typeof INITIAL_STATE, action: any) {
+export function reducer(state = getInitialState(), action: any) {
   // this is done through utility in the real app
   switch (action.type) {
     case "updateEntity": {
@@ -17,6 +23,7 @@ export function reducer(state: typeof INITIAL_STATE, action: any) {
       const newState = {
         ...state,
         ...{
+          // very naive implementation of normalizing data
           [entityType]: Object.fromEntries(
             entities.map((entity) => [entity.id, entity])
           ),
@@ -25,11 +32,14 @@ export function reducer(state: typeof INITIAL_STATE, action: any) {
       return newState;
     }
     default:
-      return state | getInitialState();
+      return state;
   }
 }
 
-export function updateEntityActionCreator(entityType: string, entities: any[]) {
+export function updateEntityActionCreator(
+  entityType: keyof EntityState,
+  entities: any[]
+) {
   return async (dispatch: Dispatch) => {
     // we have a utility for this in the real app
     // ignore error for now

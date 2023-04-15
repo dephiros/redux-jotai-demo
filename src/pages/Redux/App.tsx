@@ -6,15 +6,18 @@ import { fetchCurrentUserActionCreator } from "./ducks/currentUser";
 import { getIsCurrentUserLoading, getCurrentUser } from "./selectors/user";
 import Header from "./components/Header";
 import CustomerList from "./components/CustomerList";
+import Loader from "../../components/Loader";
 
 function App({ fetchCurrentUser, isCurrentUserLoading, currentUser }) {
   useEffect(() => {
     fetchCurrentUser?.();
   }, []);
-  return (
+  return isCurrentUserLoading ? (
+    <Loader />
+  ) : (
     <>
       <Header />
-      {!isCurrentUserLoading && <CustomerList userId={currentUser?.id} />}
+      <CustomerList userId={currentUser?.id} />
     </>
   );
 }

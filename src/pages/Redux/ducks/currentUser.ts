@@ -14,7 +14,10 @@ function getInitialState(): CurrentUserState {
   };
 }
 
-export function reducer(state: CurrentUserState, action: CurrentUserAction) {
+export function reducer(
+  state: CurrentUserState = getInitialState(),
+  action: CurrentUserAction
+) {
   // this is done through utility in the real app
   switch (action.type) {
     case "fetchUserStart": {
@@ -24,7 +27,7 @@ export function reducer(state: CurrentUserState, action: CurrentUserAction) {
       return { status: "done ", data: action.user };
     }
     default:
-      return state || getInitialState();
+      return state;
   }
 }
 
@@ -36,7 +39,6 @@ export function fetchCurrentUserActionCreator() {
       type: "fetchUserStart",
     });
     const user = await getUser();
-    // skip normalizer
     dispatch(updateEntityActionCreator("user", [user]));
     dispatch({
       type: "fetchUserDone",

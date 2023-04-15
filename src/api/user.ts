@@ -1,4 +1,6 @@
+import { waitFor } from "../utils";
 export async function getUser() {
+  await waitFor(1000);
   return Promise.resolve({
     id: 0,
     name: "Catalina Arroyo",
