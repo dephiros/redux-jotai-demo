@@ -1,75 +1,74 @@
 import { connect } from "react-redux";
-import { useEffect } from "preact/hooks";
+import { useEffect, useMemo } from "preact/hooks";
 import { tw } from "twind";
 
-import { fetchCustomersActionCreator } from "../ducks/customers";
-import { getCustomers, getIsCustomerLoading } from "../selectors/customer";
+import {
+  fetchCustomersActionCreator,
+  filterCustomerByCountryActionCreator,
+} from "../ducks/customers";
+import {
+  getCustomerFilterbyCountry,
+  getIsCustomerLoading,
+  getCustomerCountriesFilter,
+} from "../selectors/customer";
 import { Customer } from "../../interface/customer";
 import Loader from "../../../components/Loader";
+import FlashyBox from "../../../components/FlashyBox";
+import FilterPanel from "../../../components/FilterPanel";
+import CustomerRow from "./CustomerRow";
 
 function CustomerList({
   userId,
   fetchCustomers,
   customers,
   isCustomerLoading,
+  customerCountriesFilter,
+  filterCustomerByCountry,
 }: {
   userId: string;
   fetchCustomers: (userId: string) => void;
   customers: Customer[];
   isCustomerLoading: boolean;
+  customerCountriesFilter: Array<{ name: string; value: string }>;
+  filterCustomerByCountry: (filter: Map<string, boolean>) => void;
 }) {
   useEffect(() => {
     fetchCustomers(userId);
   }, [userId]);
 
-  function getName(customer) {
-    return `${customer.name.first} ${customer.name.last}`;
-  }
-
-  return isCustomerLoading ? (
-    <Loader />
-  ) : (
-    <div
-      class={tw`flex flex-col items-center mt-5 mx-auto text-center bg-yellow-100 text-black`}
-    >
-      <h3 class={tw`text-xl my-3 font-bold`}>Customers</h3>
-      <div class={tw`max-h-[500px] overflow-y-scroll`}>
-        <table class={tw`text-left min-w-[500px]`}>
-          <thead class={tw`border-b(solid 2 neutral-100) mb-6`}>
-            <tr>
-              <th class={tw`w-[50px]`}></th>
-              <th>Name</th>
-              <th>Country</th>
-            </tr>
-          </thead>
-          <tbody class="">
-            {customers.map((customer) => (
-              <tr key={customer.id}>
-                <td>
-                  <img
-                    class={tw`p-1`}
-                    alt={getName(customer)}
-                    src={customer.picture.thumbnail}
-                  />
-                </td>
-                <td>{getName(customer)}</td>
-                <td>{customer.location.country}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+  return (
+    <FlashyBox className={tw`flex flex-col justify-center text-center p-3`}>
+      <h3
+        class={tw`text-xl my-3 font-bold`}
+      >{`Customers(${customers.length})`}</h3>
+      {isCustomerLoading ? (
+        <Loader />
+      ) : (
+        <ul class={tw`max-h-[500px] overflow-y-scroll flex flex-col`}>
+          {customers.map((customer) => (
+            <li key={customer.id}>
+              <CustomerRow customer={customer} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <FilterPanel
+        filterItems={customerCountriesFilter}
+        onChange={filterCustomerByCountry}
+      />
+    </FlashyBox>
   );
 }
 
 function mapStateToProps(state) {
   return {
-    customers: getCustomers(state),
+    customers: getCustomerFilterbyCountry(state),
     isCustomerLoading: getIsCustomerLoading(state),
+    customerCountriesFilter: getCustomerCountriesFilter(state),
   };
 }
 
 export default connect(mapStateToProps, {
   fetchCustomers: fetchCustomersActionCreator,
+  filterCustomerByCountry: filterCustomerByCountryActionCreator,
 })(CustomerList);

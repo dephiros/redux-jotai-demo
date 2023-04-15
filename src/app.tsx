@@ -12,18 +12,22 @@ export function App() {
     link: `${key}`,
   }));
   return (
-    <div class={tw`flex flex-col`}>
-      <nav class={tw`bg-coolGray-200 text-green-800 w-full mb-3 px-2`}>
+    <div class={tw`flex flex-col justify-center`}>
+      <nav class={tw`bg-coolGray-200 text-green-800 w-full mb-3 p-2`}>
         <ul class={tw`flex gap-2`}>
           {LINKS.map(({ title, link }) => (
             <li key={title}>
-              <button onClick={() => setPage(link)}>{title}</button>
+              <button class={tw`p-2`} onClick={() => setPage(link)}>
+                {title}
+              </button>
             </li>
           ))}
         </ul>
       </nav>
 
-      <main class={tw`flex-1`}>
+      <main
+        class={tw`flex-1 max-w-[1000px] flex flex-col justify-center w-full mx-auto`}
+      >
         <Suspense fallback={Loader}>
           <PageComponent />
         </Suspense>

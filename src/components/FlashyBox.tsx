@@ -16,10 +16,12 @@ export default function FlashyBox({
   children,
   color = "hotpink",
   className,
+  As = "div",
 }: {
   children: ComponentChildren;
   color?: string;
   className: string;
+  As?: keyof JSX.IntrinsicElements;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,8 +34,8 @@ export default function FlashyBox({
     }
   });
   return (
-    <div class={tw`flex ${className}`} ref={containerRef}>
+    <As class={tw`flex ${className}`} ref={containerRef}>
       {children}
-    </div>
+    </As>
   );
 }
