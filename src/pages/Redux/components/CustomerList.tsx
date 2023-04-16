@@ -11,11 +11,13 @@ import {
   getIsCustomerLoading,
   getCustomerCountriesFilter,
 } from "../selectors/customer";
-import { Customer } from "../../interface/customer";
+import { Customer } from "../../../interfaces/Customer";
 import Loader from "../../../components/Loader";
 import FlashyBox from "../../../components/FlashyBox";
 import FilterPanel from "../../../components/FilterPanel";
 import CustomerRow from "./CustomerRow";
+import { StoreState } from "../store";
+import CustomerListHeader from "./CustomerListHeader";
 
 function CustomerList({
   userId,
@@ -38,9 +40,7 @@ function CustomerList({
 
   return (
     <FlashyBox className={tw`flex flex-col justify-center text-center p-3`}>
-      <h3
-        class={tw`text-xl my-3 font-bold`}
-      >{`Customers(${customers.length})`}</h3>
+      <CustomerListHeader customers={customers} />
       {isCustomerLoading ? (
         <Loader />
       ) : (
@@ -60,7 +60,7 @@ function CustomerList({
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreState) {
   return {
     customers: getCustomerFilterbyCountry(state),
     isCustomerLoading: getIsCustomerLoading(state),

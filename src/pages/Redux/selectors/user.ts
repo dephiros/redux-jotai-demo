@@ -1,21 +1,23 @@
 import { createSelector } from "reselect";
+import { StoreState } from "../store";
+import { User } from "../../../interfaces/CurrentUser";
 
 export const getIsCurrentUserLoading = createSelector(
-  (state) => state,
-  (state) => state?.currentUser.status === "loading"
+  (state: StoreState) => state,
+  (state: StoreState) => state?.currentUser.status === "loading"
 );
 
 export const getCurrentUser = createSelector(
-  (state) => state,
-  (state) => state?.entities?.user?.[0] || {}
+  (state: StoreState) => state,
+  (state: StoreState) => state?.entities?.user?.[0] || {}
 );
 
 export const getUserAvatar = createSelector(
   getCurrentUser,
-  (user) => user.avatar
+  (user: User) => user.avatar
 );
 
 export const getCurrentUserName = createSelector(
   getCurrentUser,
-  (user) => user.name
+  (user: User) => user.name
 );

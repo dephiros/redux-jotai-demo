@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import {
   CurrentUserState,
   CurrentUserAction,
-} from "./../../../interfaces/currentUser";
+} from "./../../../interfaces/CurrentUser";
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
 import { getUser } from "../../../api/user";
 

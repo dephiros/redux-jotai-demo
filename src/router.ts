@@ -1,25 +1,28 @@
-import { h } from 'preact';
-import { atom } from 'jotai';
-import { atomWithHash } from 'jotai-location';
+import { h } from "preact";
+import { atom } from "jotai";
+import { atomWithHash } from "jotai-location";
 
 export const ROUTES = new Map([
   [
-    'react-props',
-    { title: 'React Props', component: () => import('./pages/Props') },
+    "react-props",
+    {
+      title: "React Props",
+      component: () => import("./pages/Props"),
+    },
   ],
-  ['redux', { title: 'Redux', component: () => import('./pages/Redux') }],
+  ["redux", { title: "Redux", component: () => import("./pages/Redux") }],
 ]);
 
 type RouteKey<M = typeof ROUTES> = M extends Map<infer K, any> ? K : never;
 
-const hashAtom = atomWithHash<RouteKey>('page', 'react-props');
+const hashAtom = atomWithHash<RouteKey>("page", "react-props");
 
 const getPageAtom = atom(async (get) => {
   const pageKey = get(hashAtom);
   const routeObj = ROUTES.get(pageKey);
   return routeObj
     ? (await routeObj?.component())?.default
-    : () => h('div', {}, 'Unknown');
+    : () => h("div", {}, "Unknown");
 });
 
 const router = atom(

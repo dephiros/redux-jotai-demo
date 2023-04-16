@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 
-import { User } from "./../../../interfaces/User";
-import { Customer } from "./../../../interfaces/Customer";
+import { User } from "../../../interfaces/CurrentUser";
+import { Customer } from "../../../interfaces/Customer";
 export interface EntityState {
   user: Record<string, User>;
   customer: Record<string, Customer>;
@@ -25,7 +25,7 @@ export function reducer(state = getInitialState(), action: any) {
         ...{
           // very naive implementation of normalizing data
           [entityType]: Object.fromEntries(
-            entities.map((entity) => [entity.id, entity])
+            entities.map((entity: { id: string }) => [entity.id, entity])
           ),
         },
       };

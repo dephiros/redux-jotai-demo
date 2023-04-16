@@ -12,4 +12,6 @@ const rootReducers = combineReducers({
   entities: entitiesReducer,
 });
 
+export type StoreState = ReturnType<typeof rootReducers>;
+
 export default createStore(rootReducers, applyMiddleware(thunk, logger));

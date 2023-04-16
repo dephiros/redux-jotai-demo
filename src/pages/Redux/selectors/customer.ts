@@ -1,18 +1,21 @@
 import { createSelector } from "reselect";
+import { StoreState } from "../store";
+import { Customer } from "../../../interfaces/Customer";
 
 export const getCustomers = createSelector(
-  (state) => state,
-  (state) => Object.values(state.entities.customer ?? [])
+  (state: StoreState) => state,
+  (state: StoreState) => Object.values(state.entities.customer ?? [])
 );
 
 export const getIsCustomerLoading = createSelector(
-  (state) => state,
-  (state) => state.customers.status === "loading"
+  (state: StoreState) => state,
+  (state: StoreState) => state.customers.status === "loading"
 );
 
 const getCustomerCountries = createSelector(
   getCustomers,
-  (customers) => new Set(customers.map((customer) => customer.location.country))
+  (customers: Customer) =>
+    new Set(customers.map((customer: Customer) => customer.location.country))
 );
 
 export const getCustomerCountriesFilter = createSelector(
@@ -23,15 +26,15 @@ export const getCustomerCountriesFilter = createSelector(
 
 export const getCustomerFilterbyCountry = createSelector(
   getCustomers,
-  (state) => state.customers.countryFilter,
-  (customers, countryFilter) => {
+  (state: StoreState) => state.customers.countryFilter,
+  (customers: Array<Customer>, countryFilter: Map<string, boolean>) => {
     if (
       countryFilter.size === 0 ||
       ![...countryFilter.values()].some(Boolean)
     ) {
       return customers;
     }
-    return customers.filter((customer) =>
+    return customers.filter((customer: Customer) =>
       countryFilter.get(customer.location.country)
     );
   }

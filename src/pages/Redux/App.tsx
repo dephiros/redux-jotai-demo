@@ -7,6 +7,13 @@ import { getIsCurrentUserLoading, getCurrentUser } from "./selectors/user";
 import Header from "./components/Header";
 import CustomerList from "./components/CustomerList";
 import Loader from "../../components/Loader";
+import { User } from "../../interfaces/CurrentUser";
+
+interface Props {
+  fetchCurrentUser?: () => void;
+  isCurrentUserLoading: boolean;
+  currentUser?: User;
+}
 
 function App({ fetchCurrentUser, isCurrentUserLoading, currentUser }) {
   useEffect(() => {

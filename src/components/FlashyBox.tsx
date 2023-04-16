@@ -1,4 +1,4 @@
-import { ComponentChildren } from "preact";
+import { ComponentChildren, AnyComponent } from "preact";
 import { useRef, useEffect } from "preact/hooks";
 import { tw } from "twind";
 const MIN_HUE = 0;
@@ -21,7 +21,7 @@ export default function FlashyBox({
   children: ComponentChildren;
   color?: string;
   className: string;
-  As?: keyof JSX.IntrinsicElements;
+  As?: any;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
