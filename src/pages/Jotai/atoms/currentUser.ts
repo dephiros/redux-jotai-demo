@@ -11,7 +11,6 @@ declare module "./entities" {
 
 const fetchCurrentUserAtom = atom<Promise<User> | null>(null);
 fetchCurrentUserAtom.onMount = (setAtom) => {
-  console.log("mounted");
   setAtom(getUser());
 };
 
