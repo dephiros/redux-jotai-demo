@@ -22,6 +22,5 @@ root.render(
     <Suspense fallback={<Loader />}>
       <App />
     </Suspense>
-    ,
   </Provider>
 );
