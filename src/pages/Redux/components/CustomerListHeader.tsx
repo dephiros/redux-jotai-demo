@@ -2,7 +2,7 @@ import { tw } from "twind";
 
 import { Customer } from "../../../interfaces/Customer";
 import FlashyBox from "../../../components/FlashyBox";
-import { useContext } from "preact/hooks";
+import { useContext } from "react";
 import { FilterContext } from "./FilterContext";
 
 export default function CustomerListHeader({
@@ -13,10 +13,10 @@ export default function CustomerListHeader({
   const { filterVisible, toggleFilterVisible } = useContext(FilterContext);
   return (
     <FlashyBox className="justify-center">
-      <h3 class={tw`text-xl my-3 font-bold justify-center`}>
+      <h3 className={tw`text-xl my-3 font-bold justify-center`}>
         {`Customers(${customers.length})`}
       </h3>
-      <button class={tw`p-2`} onClick={toggleFilterVisible}>
+      <button className={tw`p-2`} onClick={toggleFilterVisible}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

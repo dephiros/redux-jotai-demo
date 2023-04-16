@@ -7,7 +7,7 @@ import store from "./store";
 export default function () {
   return (
     <Provider store={store}>
-      <FilterContextProvider value={{ filterVisible: false }}>
+      <FilterContextProvider>
         <App />
       </FilterContextProvider>
     </Provider>

@@ -7,7 +7,7 @@ export default function ({ customer }: { customer: Customer }) {
   return (
     <FlashyBox className={tw`flex flex-col w-[200px] text-left`}>
       <img
-        class={tw`p-1 w-[100px] h-[100px] rounded-full border-2 border-gray-300`}
+        className={tw`p-1 w-[100px] h-[100px] rounded-full border-2 border-gray-300`}
         alt={getName(customer.name)}
         src={customer.picture.medium}
       />

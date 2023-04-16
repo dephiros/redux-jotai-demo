@@ -1,5 +1,5 @@
 import { tw } from "twind";
-import { useState, useRef } from "preact/hooks";
+import { useState, useRef } from "react";
 
 import FlashyBox from "./FlashyBox";
 
@@ -49,20 +49,20 @@ export default function FilterPanel({
       )}
     >
       <button
-        class={tw`bg-white text-black`}
+        className={tw`bg-white text-black`}
         onClick={() => onVisibleChange?.(false)}
       >
         Close
       </button>
       {filterItems.map((item) => (
-        <li key={item.value} class={tw`flex`}>
+        <li key={item.value} className={tw`flex`}>
           <input
             type="checkbox"
             onChange={() => handleOnChange(item)}
             name={item.value}
             id={`${idRef.current}-${item.value}`}
           />{" "}
-          <label for={`${idRef.current}-${item.value}`}>{item.name}</label>
+          <label htmlFor={`${idRef.current}-${item.value}`}>{item.name}</label>
         </li>
       ))}
     </FlashyBox>

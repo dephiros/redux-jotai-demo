@@ -1,18 +1,13 @@
-import { createContext, ComponentChildren } from "preact";
-import { StateUpdater, useCallback, useState } from "preact/hooks";
+import React, { createContext, ReactNode } from "react";
 
 export const FilterContext = createContext<{
   filterVisible: boolean;
   toggleFilterVisible: () => void;
 }>({} as any);
 
-export function FilterContextProvider({
-  children,
-}: {
-  children: ComponentChildren;
-}) {
-  const [filterVisible, setFilterVisible] = useState(false);
-  const toggleFilterVisible = useCallback(
+export function FilterContextProvider({ children }: { children: ReactNode }) {
+  const [filterVisible, setFilterVisible] = React.useState(false);
+  const toggleFilterVisible = React.useCallback(
     () => setFilterVisible((v) => !v),
     [setFilterVisible]
   );

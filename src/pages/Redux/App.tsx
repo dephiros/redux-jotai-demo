@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "preact/hooks";
+import { useContext, useEffect } from "react";
 
 import { connect } from "react-redux";
 

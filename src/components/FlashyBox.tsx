@@ -1,5 +1,4 @@
-import { ComponentChildren, AnyComponent } from "preact";
-import { useRef, useEffect } from "preact/hooks";
+import React from "react";
 import { tw } from "twind";
 const MIN_HUE = 0;
 const MAX_HUE = 250;
@@ -18,14 +17,14 @@ export default function FlashyBox({
   className = "",
   As = "div",
 }: {
-  children: ComponentChildren;
+  children: React.ReactNode;
   color?: string;
   className?: string;
   As?: any;
 }) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const container = containerRef.current;
     if (container) {
       container.animate([{ backgroundColor: color, easing: "ease-out" }], {
@@ -34,7 +33,7 @@ export default function FlashyBox({
     }
   });
   return (
-    <As class={tw`flex ${className}`} ref={containerRef}>
+    <As className={tw`flex ${className}`} ref={containerRef}>
       {children}
     </As>
   );

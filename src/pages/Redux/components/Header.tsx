@@ -12,7 +12,7 @@ export interface Props {
 function Header({ avatar, name }: Props) {
   return (
     <FlashyBox className={tw`flex flex-col text-center text-xl`}>
-      <img class={tw`block mx-auto w-[100px]`} src={avatar} alt={name} />
+      <img className={tw`block mx-auto w-[100px]`} src={avatar} alt={name} />
       <p>{name}</p>
     </FlashyBox>
   );

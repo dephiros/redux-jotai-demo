@@ -11,8 +11,8 @@
   "dependencies": {
     "jotai": "^2.0.3",
     "jotai-location": "^0.5.1",
-    "preact": "^10.13.1",
-    "preact-compat": "^3.19.0",
+    "react": "^18",
+    "react-dom": "^18",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
@@ -22,7 +22,9 @@
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@preact/preset-vite": "^2.5.0",
+    "@types/react-dom": "^18.0.11",
     "@types/redux-logger": "^3.0.9",
+    "@vitejs/plugin-react": "^3.1.0",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.7",
     "redux-logger": "^3.0.6",

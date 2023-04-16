@@ -1,4 +1,4 @@
-import { Suspense } from "preact/compat";
+import { Suspense } from "react";
 import { useAtom } from "jotai";
 import { tw } from "twind";
 
@@ -12,12 +12,12 @@ export function App() {
     link: `${key}`,
   }));
   return (
-    <div class={tw`flex flex-col justify-center`}>
-      <nav class={tw`bg-coolGray-200 text-black w-full mb-3 p-2`}>
-        <ul class={tw`flex gap-2`}>
+    <div className={tw`flex flex-col justify-center`}>
+      <nav className={tw`bg-coolGray-200 text-black w-full mb-3 p-2`}>
+        <ul className={tw`flex gap-2`}>
           {LINKS.map(({ title, link }) => (
             <li key={title}>
-              <button class={tw`p-2`} onClick={() => setPage(link)}>
+              <button className={tw`p-2`} onClick={() => setPage(link)}>
                 {title}
               </button>
             </li>
@@ -26,9 +26,9 @@ export function App() {
       </nav>
 
       <main
-        class={tw`flex-1 max-w-[1000px] flex flex-col justify-center w-full mx-auto`}
+        className={tw`flex-1 max-w-[1000px] flex flex-col justify-center w-full mx-auto`}
       >
-        <Suspense fallback={Loader}>
+        <Suspense fallback={<Loader />}>
           <PageComponent />
         </Suspense>
       </main>

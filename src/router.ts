@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { createElement as h, lazy } from "react";
 import { atom } from "jotai";
 import { atomWithHash } from "jotai-location";
 
@@ -7,10 +7,11 @@ export const ROUTES = new Map([
     "react-props",
     {
       title: "React Props",
-      component: () => import("./pages/Props"),
+      component: lazy(() => import("./pages/Props")),
     },
   ],
-  ["redux", { title: "Redux", component: () => import("./pages/Redux") }],
+  ["redux", { title: "Redux", component: lazy(() => import("./pages/Redux")) }],
+  ["jotai", { title: "Jotai", component: lazy(() => import("./pages/Jotai")) }],
 ]);
 
 type RouteKey<M = typeof ROUTES> = M extends Map<infer K, any> ? K : never;
@@ -20,12 +21,10 @@ const hashAtom = atomWithHash<RouteKey>("page", "react-props");
 const getPageAtom = atom(async (get) => {
   const pageKey = get(hashAtom);
   const routeObj = ROUTES.get(pageKey);
-  return routeObj
-    ? (await routeObj?.component())?.default
-    : () => h("div", {}, "Unknown");
+  return routeObj ? await routeObj?.component : () => h("div", {}, "Unknown");
 });
 
-const router = atom(
+const routerAtom = atom(
   (get) => get(getPageAtom),
   async (get, set, newPage: string) => {
     set(hashAtom, newPage);
@@ -33,4 +32,8 @@ const router = atom(
   }
 );
 
-export default router;
+routerAtom.onMount = (setAtom) => {
+  console.log("router mounted");
+};
+
+export default routerAtom;

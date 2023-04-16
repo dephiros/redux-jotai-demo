@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useContext, useEffect, useMemo } from "preact/hooks";
+import { useContext, useEffect, useMemo } from "react";
 import { tw } from "twind";
 
 import {
@@ -42,7 +42,7 @@ function CustomerList({
       {isCustomerLoading ? (
         <Loader />
       ) : (
-        <ul class={tw`max-h-[500px] overflow-y-scroll flex flex-col`}>
+        <ul className={tw`max-h-[500px] overflow-y-scroll flex flex-col`}>
           {customers.map((customer) => (
             <li key={customer.id}>
               <CustomerRow customer={customer} />
