@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import CustomerList from "./components/CustomerList";
 import Loader from "../../components/Loader";
 import { User } from "../../interfaces/CurrentUser";
-import FilterPanel from "../../components/FilterPanel";
+import FilterPanel from "./components/FilterPanel";
 import { getCustomerCountriesFilter } from "./selectors/customer";
 import { StoreState } from "./store";
 import { filterCustomerByCountryActionCreator } from "./ducks/customers";

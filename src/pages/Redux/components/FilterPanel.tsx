@@ -1,7 +1,7 @@
 import { tw } from "twind";
 import { useState, useRef } from "react";
 
-import FlashyBox from "./FlashyBox";
+import FlashyBox from "../../../components/FlashyBox";
 
 export interface FilterItem {
   name: string;

@@ -1,15 +1,11 @@
 import { connect } from "react-redux";
-import { useContext, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { tw } from "twind";
 
-import {
-  fetchCustomersActionCreator,
-  filterCustomerByCountryActionCreator,
-} from "../ducks/customers";
+import { fetchCustomersActionCreator } from "../ducks/customers";
 import {
   getCustomerFilterbyCountry,
   getIsCustomerLoading,
-  getCustomerCountriesFilter,
 } from "../selectors/customer";
 import { Customer } from "../../../interfaces/Customer";
 import Loader from "../../../components/Loader";
@@ -17,7 +13,6 @@ import FlashyBox from "../../../components/FlashyBox";
 import CustomerRow from "./CustomerRow";
 import { StoreState } from "../store";
 import CustomerListHeader from "./CustomerListHeader";
-import { FilterContext } from "./FilterContext";
 
 function CustomerList({
   userId,
@@ -33,8 +28,6 @@ function CustomerList({
   useEffect(() => {
     fetchCustomers(userId);
   }, [userId]);
-
-  const { filterVisible, setFilterVisible } = useContext(FilterContext);
 
   return (
     <FlashyBox className={tw`flex flex-col justify-center text-center p-3`}>

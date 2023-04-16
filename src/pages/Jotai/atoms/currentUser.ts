@@ -10,26 +10,20 @@ declare module "./entities" {
   }
 }
 
-const fetchCurrentUserAtom = atom<Promise<User> | null>(null);
-fetchCurrentUserAtom.onMount = (setAtom) => {
+// This holds the user loading state
+const currentUserPromiseAtom = atom<Promise<User> | null>(null);
+currentUserPromiseAtom.onMount = (setAtom) => {
   setAtom(getUser());
 };
 
 export const currentUserAtom = atom(
   async (get) => {
-    return get(fetchCurrentUserAtom);
+    return get(currentUserPromiseAtom);
   },
   async (get, set) => {
-    const user = await get(fetchCurrentUserAtom);
+    const user = await get(currentUserPromiseAtom);
     if (!user) throw new Error("No user");
-    const entities = get(entityAtom);
-    set(entityAtom, {
-      ...entities,
-      users: {
-        ...entities?.users,
-        [user.id]: user,
-      },
-    });
+    set(entityAtom, "users", [user]);
   }
 );
 
