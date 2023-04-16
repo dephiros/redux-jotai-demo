@@ -4,7 +4,8 @@ import { Customer } from "../../../interfaces/Customer";
 
 export const getCustomers = createSelector(
   (state: StoreState) => state,
-  (state: StoreState) => Object.values(state.entities.customer ?? [])
+  (state: StoreState): Array<Customer> =>
+    Object.values(state.entities.customers ?? [])
 );
 
 export const getIsCustomerLoading = createSelector(
@@ -14,8 +15,10 @@ export const getIsCustomerLoading = createSelector(
 
 const getCustomerCountries = createSelector(
   getCustomers,
-  (customers: Customer) =>
-    new Set(customers.map((customer: Customer) => customer.location.country))
+  (customers: Array<Customer>) =>
+    new Set<string>(
+      customers.map((customer: Customer) => customer.location.country)
+    )
 );
 
 export const getCustomerCountriesFilter = createSelector(

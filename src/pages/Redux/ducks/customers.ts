@@ -40,7 +40,7 @@ export function fetchCustomersActionCreator(userId: string) {
       type: CustomerActionType.FETCH_CUSTOMER_START,
     });
     const customers = await getCustomers(userId);
-    dispatch(updateEntityActionCreator("customer", customers));
+    dispatch(updateEntityActionCreator("customers", customers));
     dispatch({
       type: CustomerActionType.FETCH_CUSTOMER_DONE,
       customers,

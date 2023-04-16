@@ -9,7 +9,7 @@ export const getIsCurrentUserLoading = createSelector(
 
 export const getCurrentUser = createSelector(
   (state: StoreState) => state,
-  (state: StoreState) => state?.entities?.user?.[0] || {}
+  (state: StoreState) => state?.entities?.users?.[0] || {}
 );
 
 export const getUserAvatar = createSelector(

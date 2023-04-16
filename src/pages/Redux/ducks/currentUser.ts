@@ -39,7 +39,7 @@ export function fetchCurrentUserActionCreator() {
       type: "fetchUserStart",
     });
     const user = await getUser();
-    dispatch(updateEntityActionCreator("user", [user]));
+    dispatch(updateEntityActionCreator("users", [user]));
     dispatch({
       type: "fetchUserDone",
       user,

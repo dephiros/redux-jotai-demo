@@ -3,14 +3,14 @@ import { Dispatch } from "redux";
 import { User } from "../../../interfaces/CurrentUser";
 import { Customer } from "../../../interfaces/Customer";
 export interface EntityState {
-  user: Record<string, User>;
-  customer: Record<string, Customer>;
+  users: Record<string, User>;
+  customers: Record<string, Customer>;
 }
 
 function getInitialState(): EntityState {
   return {
-    user: {},
-    customer: {},
+    users: {},
+    customers: {},
   };
 }
 
