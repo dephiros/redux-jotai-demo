@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import { getUser } from "../../../api/user";
 import { User } from "../../../interfaces/CurrentUser";
+import { getName } from "../../../utils";
 import { entityAtom, EntityStore } from "./entities";
 
 declare module "./entities" {
@@ -32,6 +33,12 @@ export const currentUserAtom = atom(
   }
 );
 
-currentUserAtom.onMount = (setAtom) => {
-  console.log("user mounted");
-};
+export const currentUserAvatarAtom = atom(async (get) => {
+  const user = await get(currentUserAtom);
+  return user?.avatar;
+});
+
+export const currentUserNameAtom = atom(async (get) => {
+  const user = await get(currentUserAtom);
+  return user?.name;
+});
