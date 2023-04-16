@@ -13,7 +13,7 @@ export function App() {
   }));
   return (
     <div class={tw`flex flex-col justify-center`}>
-      <nav class={tw`bg-coolGray-200 text-green-800 w-full mb-3 p-2`}>
+      <nav class={tw`bg-coolGray-200 text-black w-full mb-3 p-2`}>
         <ul class={tw`flex gap-2`}>
           {LINKS.map(({ title, link }) => (
             <li key={title}>

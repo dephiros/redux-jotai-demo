@@ -14,13 +14,13 @@ export function getColor(
 
 export default function FlashyBox({
   children,
-  color = "hotpink",
-  className,
+  color = "tomato",
+  className = "",
   As = "div",
 }: {
   children: ComponentChildren;
   color?: string;
-  className: string;
+  className?: string;
   As?: any;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);

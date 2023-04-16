@@ -11,9 +11,13 @@ export interface FilterItem {
 export default function FilterPanel({
   filterItems,
   onChange,
+  visible,
+  onVisibleChange,
 }: {
   filterItems: Array<{ name: string; value: string }>;
   onChange: (selected: Map<string, boolean>) => void;
+  visible?: boolean;
+  onVisibleChange?: (visible: boolean) => void;
 }) {
   const [selectedItems, setSelectedItems] = useState(
     new Map(filterItems.map((item) => [item.value, false]))
@@ -32,8 +36,24 @@ export default function FilterPanel({
   return (
     <FlashyBox
       As="ul"
-      className={tw`flex flex-col absolute top-0 right-0 gap-3 bg-green-800 p-4`}
+      className={tw(
+        `flex flex-col 
+        absolute top-0 right-0 gap-3 
+        bg-coolGray-900 p-4 max-h-screen overflow-y-scroll rounded-md shadow-lg
+        transition-transform duration-300 ease-in-out transform origin-top-right
+        `,
+        {
+          "scale-0": !visible,
+          "scale-100": visible,
+        }
+      )}
     >
+      <button
+        class={tw`bg-white text-black`}
+        onClick={() => onVisibleChange?.(false)}
+      >
+        Close
+      </button>
       {filterItems.map((item) => (
         <li key={item.value} class={tw`flex`}>
           <input
