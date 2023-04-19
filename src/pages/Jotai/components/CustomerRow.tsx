@@ -1,13 +1,14 @@
 import { tw } from "twind";
+import FlashyBox from "../../../components/FlashyBox";
 import { Customer } from "../../../interfaces/Customer";
-import { getName } from "../../../utils";
+import CustomerAvatar from "./CustomerAvatar";
+import CustomerDetails from "./CustomerDetails";
 
 export default function CustomerRow({ customer }: { customer: Customer }) {
   return (
-    <div className={tw`flex flex-col justify-center text-center`}>
-      <p>
-        {getName(customer.name)}: <b>{customer.location.country}</b>
-      </p>
-    </div>
+    <FlashyBox className={tw`flex p-2 gap-3`}>
+      <CustomerAvatar customer={customer} />
+      <CustomerDetails customer={customer} />
+    </FlashyBox>
   );
 }

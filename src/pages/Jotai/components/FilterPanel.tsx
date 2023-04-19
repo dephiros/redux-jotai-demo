@@ -1,5 +1,5 @@
 import { tw } from "twind";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 import FlashyBox from "../../../components/FlashyBox";
 import { atom, useAtom, useAtomValue } from "jotai";
@@ -14,6 +14,7 @@ export interface FilterItem {
 export default function FilterPanel() {
   const [visible, toggleVisible] = useAtom(filterVisibleAtom);
 
+  // just quick way to generate a unique id for input/label
   const idRef = useRef(new Date().getTime());
   const countries = useAtomValue(customerCountriesAtom);
 

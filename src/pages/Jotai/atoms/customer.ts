@@ -45,45 +45,46 @@ export const customerCountriesAtom = atom(async (get) => {
 
 const _selectedCountriesAtom = atom(new Map<string, boolean>());
 export const selectedCountriesAtom = atom(
-  async (get) => {
-    const countries = await get(customerCountriesAtom);
-    return new Map([...countries].map((country) => [country, false]));
+  (get) => {
+    return get(_selectedCountriesAtom);
   },
-  (get, set, country: string, selected: boolean) => {
+  (get, set, country: string, selected?: boolean) => {
     const selectedCountries = get(_selectedCountriesAtom);
-    return set(
-      _selectedCountriesAtom,
-      new Map(selectedCountries).set(country, selected)
+    const newValue =
+      selected === undefined ? !selectedCountries.get(country) : selected;
+    const newSelectedCountries = new Map(selectedCountries).set(
+      country,
+      newValue
     );
+    set(_selectedCountriesAtom, newSelectedCountries);
+    return newSelectedCountries;
   }
 );
+
+// this function create an atom that can only modify one country
 export function getFilterStateForCountryAtom(country: string) {
   return atom(
-    (get) => get(_selectedCountriesAtom).get(country),
+    (get) => get(selectedCountriesAtom).get(country),
     (get, set, selected?: boolean) => {
-      const newValue =
-        selected === undefined
-          ? !get(_selectedCountriesAtom).get(country)
-          : selected;
-      set(selectedCountriesAtom, country, newValue);
+      set(selectedCountriesAtom, country, selected);
     }
   );
 }
 
 export const filteredCustomerByCountryAtom = atom(async (get) => {
   const customers = (await get(customersAtom)) || [];
-  const selectedCountries = await get(selectedCountriesAtom);
-  if (
-    selectedCountries.size === 0 ||
-    ![...selectedCountries.values()].some(Boolean)
-  )
-    return customers;
+  const filteredCountries = new Set(
+    [...get(selectedCountriesAtom)].filter(([k, v]) => v).map(([k, v]) => k)
+  );
+  const allCountries = await get(customerCountriesAtom);
+  const selectedCountries =
+    filteredCountries.size === 0 ? allCountries : filteredCountries;
   return customers.filter((customer: Customer) =>
-    selectedCountries.get(customer.location.country)
+    selectedCountries.has(customer.location.country)
   );
 });
 
 export const customerCountAtom = atom(async (get) => {
-  const customers = await get(customersAtom);
+  const customers = await get(filteredCustomerByCountryAtom);
   return customers?.length || 0;
 });

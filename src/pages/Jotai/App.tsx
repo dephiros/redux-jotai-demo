@@ -10,8 +10,8 @@ export default function App() {
       <Header />
       <React.Suspense fallback={<Loader />}>
         <CustomerList />
-        <FilterPanel />
       </React.Suspense>
+      <FilterPanel />
     </React.Fragment>
   );
 }
