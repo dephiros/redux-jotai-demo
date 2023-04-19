@@ -7,7 +7,7 @@ import {
   CustomerAction,
   CustomerActionType,
 } from "../../../interfaces/Customer";
-import { getCustomers } from "../../../api/customer";
+import { getCustomers } from "../../../models/customer";
 
 const getInitialState = (): CustomerState => ({
   status: null,

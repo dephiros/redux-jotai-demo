@@ -1,6 +1,5 @@
 import { tw } from "twind";
 
-import { Customer } from "../../../interfaces/Customer";
 import FlashyBox from "../../../components/FlashyBox";
 import { useAtomValue, useSetAtom } from "jotai";
 import { filterVisibleAtom } from "./FilterPanel";

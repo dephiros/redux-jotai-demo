@@ -25,7 +25,10 @@ export function reducer(state = getInitialState(), action: any) {
         ...{
           // very naive implementation of normalizing data
           [entityType]: Object.fromEntries(
-            entities.map((entity: { id: string }) => [entity.id, entity])
+            entities.map((entity: { pk: () => string }) => [
+              entity.pk(),
+              entity,
+            ])
           ),
         },
       };

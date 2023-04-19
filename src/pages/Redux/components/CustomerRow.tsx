@@ -1,6 +1,6 @@
 import { tw } from "twind";
 
-import { Customer } from "../../../interfaces/Customer";
+import { Customer } from "../../../models/Customer";
 import CustomerAvatar from "./CustomerAvatar";
 import CustomerDetails from "./CustomerDetails";
 import FlashyBox from "../../../components/FlashyBox";

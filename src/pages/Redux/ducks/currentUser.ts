@@ -5,7 +5,7 @@ import {
   CurrentUserAction,
 } from "./../../../interfaces/CurrentUser";
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
-import { getUser } from "../../../api/user";
+import { getUser } from "../../../models/user";
 
 function getInitialState(): CurrentUserState {
   return {

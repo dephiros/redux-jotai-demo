@@ -1,7 +1,5 @@
 import { atom } from "jotai";
-import { getUser } from "../../../api/user";
-import { User } from "../../../interfaces/CurrentUser";
-import { getName } from "../../../utils";
+import { getUser, User } from "../../../models/user";
 import { entityAtom, EntityStore } from "./entities";
 
 declare module "./entities" {

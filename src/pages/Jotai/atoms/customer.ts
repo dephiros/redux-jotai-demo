@@ -1,7 +1,5 @@
 import { atom } from "jotai";
-import { getCustomers } from "../../../api/customer";
-import { Customer } from "../../../interfaces/Customer";
-import { getName } from "../../../utils";
+import { getCustomers, Customer } from "../../../models/customer";
 import { currentUserAtom } from "./currentUser";
 import { entityAtom, EntityStore } from "./entities";
 

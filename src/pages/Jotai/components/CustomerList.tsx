@@ -1,7 +1,6 @@
 import { useAtomValue } from "jotai";
 import { tw } from "twind";
 import FlashyBox from "../../../components/FlashyBox";
-import Loader from "../../../components/Loader";
 import { filteredCustomerByCountryAtom } from "../atoms/customer";
 import CustomerListHeader from "./CustomerListHeader";
 import CustomerRow from "./CustomerRow";
@@ -13,7 +12,7 @@ export default function CustomerList() {
       <CustomerListHeader />
       <ul className={tw`max-h-[500px] overflow-y-scroll flex flex-col`}>
         {customers.map((customer) => (
-          <li key={customer.id}>
+          <li key={customer.pk()}>
             <CustomerRow customer={customer} />
           </li>
         ))}

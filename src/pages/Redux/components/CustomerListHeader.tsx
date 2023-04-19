@@ -1,6 +1,6 @@
 import { tw } from "twind";
 
-import { Customer } from "../../../interfaces/Customer";
+import { Customer } from "../../../models/Customer";
 import FlashyBox from "../../../components/FlashyBox";
 import { useContext } from "react";
 import { FilterContext } from "./FilterContext";
