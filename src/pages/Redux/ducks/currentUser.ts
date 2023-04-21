@@ -1,13 +1,13 @@
 import { Dispatch } from "redux";
 
 import {
-  CurrentUserState,
+  CurrentUserAPIState,
   CurrentUserAction,
-} from "./../../../interfaces/CurrentUser";
+} from "../../../interfaces/User";
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
 import { getUser } from "../../../models/user";
 
-function getInitialState(): CurrentUserState {
+function getInitialState(): CurrentUserAPIState {
   return {
     status: null,
     data: null,
@@ -15,16 +15,16 @@ function getInitialState(): CurrentUserState {
 }
 
 export function reducer(
-  state: CurrentUserState = getInitialState(),
+  state: CurrentUserAPIState = getInitialState(),
   action: CurrentUserAction
-) {
+): CurrentUserAPIState {
   // this is done through utility in the real app
   switch (action.type) {
     case "fetchUserStart": {
-      return { status: "loading" };
+      return { status: "loading", data: null };
     }
     case "fetchUserDone": {
-      return { status: "done ", data: action.user };
+      return { status: "done", data: action.user };
     }
     default:
       return state;
@@ -39,6 +39,7 @@ export function fetchCurrentUserActionCreator() {
       type: "fetchUserStart",
     });
     const user = await getUser();
+    // @ts-expect-error: need to figure out thunk type
     dispatch(updateEntityActionCreator("users", [user]));
     dispatch({
       type: "fetchUserDone",

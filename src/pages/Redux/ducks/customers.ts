@@ -2,12 +2,12 @@ import { Dispatch } from "redux";
 
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
 import {
-  Customer,
+  CustomerAPIInterface,
   CustomerState,
   CustomerAction,
   CustomerActionType,
 } from "../../../interfaces/Customer";
-import { getCustomers } from "../../../models/customer";
+import { getCustomers } from "../../../api/customer";
 
 const getInitialState = (): CustomerState => ({
   status: null,
@@ -15,14 +15,17 @@ const getInitialState = (): CustomerState => ({
   countryFilter: new Map(),
 });
 
-export function reducer(state = getInitialState(), action: CustomerAction) {
+export function reducer(
+  state = getInitialState(),
+  action: CustomerAction
+): CustomerState {
   // this is done through utility in the real app
   switch (action.type) {
     case CustomerActionType.FETCH_CUSTOMER_START: {
       return { ...state, status: "loading" };
     }
     case CustomerActionType.FETCH_CUSTOMER_DONE: {
-      return { ...state, status: "done ", data: action.customers };
+      return { ...state, status: "done", data: action.customers };
     }
     case CustomerActionType.FILTER_CUSTOMER_BY_COUNTRY: {
       return { ...state, countryFilter: action.filter };
@@ -40,6 +43,7 @@ export function fetchCustomersActionCreator(userId: string) {
       type: CustomerActionType.FETCH_CUSTOMER_START,
     });
     const customers = await getCustomers(userId);
+    // @ts-expect-error: need to figure out thunk type
     dispatch(updateEntityActionCreator("customers", customers));
     dispatch({
       type: CustomerActionType.FETCH_CUSTOMER_DONE,

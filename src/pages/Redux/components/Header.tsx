@@ -5,8 +5,8 @@ import { StoreState } from "../store";
 import FlashyBox from "../../../components/FlashyBox";
 
 export interface Props {
-  avatar: string;
-  name: string;
+  avatar?: string;
+  name?: string;
 }
 
 function Header({ avatar, name }: Props) {

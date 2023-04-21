@@ -7,7 +7,7 @@ import { getIsCurrentUserLoading, getCurrentUser } from "./selectors/user";
 import Header from "./components/Header";
 import CustomerList from "./components/CustomerList";
 import Loader from "../../components/Loader";
-import { User } from "../../interfaces/CurrentUser";
+import { User } from "../../models/User";
 import FilterPanel from "./components/FilterPanel";
 import { getCustomerCountriesFilter } from "./selectors/customer";
 import { StoreState } from "./store";
@@ -17,7 +17,7 @@ import { FilterContext } from "./components/FilterContext";
 interface Props {
   fetchCurrentUser?: () => void;
   isCurrentUserLoading: boolean;
-  currentUser?: User;
+  currentUser: User | null;
   customerCountriesFilter: Array<{ name: string; value: string }>;
   filterCustomerByCountry: (filter: Map<string, boolean>) => void;
 }

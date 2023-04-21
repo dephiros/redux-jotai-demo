@@ -11,6 +11,9 @@ export class User extends Entity {
   }
 }
 
+// TODO this needs to return the JSON interface
+// normalize would need to be called inside atom or store before putting inside the store
+// move this to atom and use atom to define a resource
 export async function getUser(): Promise<User> {
   await waitFor(1000);
   return Promise.resolve(

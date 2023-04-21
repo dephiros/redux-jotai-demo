@@ -1,27 +1,30 @@
 import { atom } from "jotai";
+import { CurrentUserAPIInterface } from "../../../interfaces/User";
 import { getUser, User } from "../../../models/user";
-import { entityAtom, EntityStore } from "./entities";
+import { createAPIResourceAtom } from "./utils";
 
 declare module "./entities" {
   interface EntityStore {
-    users?: Record<string, User>;
+    User?: Record<string, CurrentUserAPIInterface>;
   }
 }
 
-// This holds the user loading state
-const currentUserPromiseAtom = atom<Promise<User> | null>(null);
-currentUserPromiseAtom.onMount = (setAtom) => {
-  setAtom(getUser());
-};
+// make atom private by just not expose them
+const _usersAtom = createAPIResourceAtom({
+  EntityClass: User,
+  entityKey: "users",
+  fetchResource: async () => {
+    return getUser();
+  },
+});
 
 export const currentUserAtom = atom(
   async (get) => {
-    return get(currentUserPromiseAtom);
+    const users = await get(_usersAtom);
+    return Object.values(users)[0];
   },
   async (get, set) => {
-    const user = await get(currentUserPromiseAtom);
-    if (!user) throw new Error("No user");
-    set(entityAtom, "users", [user]);
+    set(_usersAtom);
   }
 );
 

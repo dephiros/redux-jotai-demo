@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
 
-import { User } from "../../../interfaces/CurrentUser";
-import { Customer } from "../../../interfaces/Customer";
+import type { CurrentUserAPIInterface } from "../../../interfaces/User";
+import type { CustomerAPIInterface } from "../../../interfaces/Customer";
 export interface EntityState {
-  users: Record<string, User>;
-  customers: Record<string, Customer>;
+  users: Record<string, CurrentUserAPIInterface>;
+  customers: Record<string, CustomerAPIInterface>;
 }
 
 function getInitialState(): EntityState {
@@ -41,7 +41,7 @@ export function reducer(state = getInitialState(), action: any) {
 
 export function updateEntityActionCreator(
   entityType: keyof EntityState,
-  entities: any[]
+  entities: Array<CurrentUserAPIInterface | CustomerAPIInterface>
 ) {
   return async (dispatch: Dispatch) => {
     // we have a utility for this in the real app

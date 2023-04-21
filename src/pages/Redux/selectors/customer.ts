@@ -1,11 +1,14 @@
 import { createSelector } from "reselect";
 import { StoreState } from "../store";
-import { Customer } from "../../../interfaces/Customer";
+import { CustomerAPIInterface } from "../../../interfaces/Customer";
+import { Customer } from "../../../models/Customer";
 
 export const getCustomers = createSelector(
   (state: StoreState) => state,
   (state: StoreState): Array<Customer> =>
-    Object.values(state.entities.customers ?? [])
+    Object.values(state.entities.customers ?? []).map((customer) =>
+      Customer.fromJS(customer)
+    )
 );
 
 export const getIsCustomerLoading = createSelector(

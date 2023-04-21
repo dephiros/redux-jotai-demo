@@ -36,6 +36,12 @@ devDependencies:
   '@babel/core':
     specifier: ^7.21.3
     version: 7.21.3
+  '@rest-hooks/normalizr':
+    specifier: ^10.1.0
+    version: 10.1.0
+  '@sinclair/typebox':
+    specifier: ^0.28.2
+    version: 0.28.2
   '@types/react-dom':
     specifier: ^18.0.11
     version: 18.0.11
@@ -540,6 +546,13 @@ packages:
       '@babel/runtime': 7.21.0
     dev: false
 
+  /@rest-hooks/normalizr@10.1.0:
+    resolution: {integrity: sha512-qyiakUD3Je3hS1JnC4YarevVDaXJTM7y38gPUA6zkrybsCcQhw5m3RIRlArbGhsLXJotBkSLJ/tyheb4tjGX0Q==}
+    engines: {node: ^12.17 || ^13.7 || >=14}
+    dependencies:
+      '@babel/runtime': 7.21.0
+    dev: true
+
   /@rest-hooks/rest@6.5.0:
     resolution: {integrity: sha512-ZemecHHwCUh82vk45nauu9gyDp+fVpc9bmcJ4RowiE5dV8qJvn09V6Ss4ctIYG3MUPI3uGPYw3skl0IKsUHjng==}
     engines: {node: ^12.17 || ^13.7 || >=14}
@@ -548,6 +561,10 @@ packages:
       '@rest-hooks/endpoint': 3.7.4
       path-to-regexp: 6.2.1
     dev: false
+
+  /@sinclair/typebox@0.28.2:
+    resolution: {integrity: sha512-3CdUgXqd6ud7tKvEvo5h2c1lx87DsR9pwZeDJ1AVdG9fFK87uTXBR7/b5BeHowjkFgrPmvaYyc+xo407laUceA==}
+    dev: true
 
   /@types/hoist-non-react-statics@3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}

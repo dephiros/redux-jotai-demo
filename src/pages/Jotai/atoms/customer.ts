@@ -1,43 +1,27 @@
 import { atom } from "jotai";
-import { getCustomers, Customer } from "../../../models/customer";
+import { Customer } from "../../../models/customer";
+import { getCustomers } from "../../../api/customer";
 import { currentUserAtom } from "./currentUser";
-import { entityAtom, EntityStore } from "./entities";
+import { CustomerAPIInterface } from "../../../interfaces/Customer";
+import { createAPIResourceAtom } from "./utils";
 
 declare module "./entities" {
   interface EntityStore {
-    customers?: Record<string, Customer>;
+    Customer?: Record<string, CustomerAPIInterface>;
   }
 }
 
-const customersPromiseAtom = atom<Promise<Array<Customer>> | null>(null);
-const fetchCustomersAtom = atom(
-  async (get) => {
-    return get(customersPromiseAtom);
+export const customersAtom = createAPIResourceAtom({
+  EntityClass: Customer,
+  entityKey: "customers",
+  fetchResource: async (get) => {
+    const user = await get(currentUserAtom);
+    return getCustomers(user?.id || "");
   },
-  async (get, set) => {
-    const currentUser = await get(currentUserAtom);
-    if (!currentUser) throw new Error("No user");
-    set(customersPromiseAtom, getCustomers(currentUser.id));
-  }
-);
-fetchCustomersAtom.onMount = (setAtom) => {
-  setAtom();
-};
-
-export const customersAtom = atom(
-  async (get) => {
-    return get(fetchCustomersAtom) || [];
-  },
-  async (get, set) => {
-    const customers = await get(fetchCustomersAtom);
-    if (!customers) throw new Error("Customers not initialized");
-    const entities = get(entityAtom);
-    set(entityAtom, "customers", customers);
-  }
-);
+});
 
 export const customerCountriesAtom = atom(async (get) => {
-  const customers = await get(customersAtom);
+  const customers = Object.values(await get(customersAtom));
   return new Set(customers?.map((customer) => customer.location.country) || []);
 });
 
@@ -70,7 +54,7 @@ export function getFilterStateForCountryAtom(country: string) {
 }
 
 export const filteredCustomerByCountryAtom = atom(async (get) => {
-  const customers = (await get(customersAtom)) || [];
+  const customers = Object.values((await get(customersAtom)) || {});
   const filteredCountries = new Set(
     [...get(selectedCountriesAtom)].filter(([k, v]) => v).map(([k, v]) => k)
   );
