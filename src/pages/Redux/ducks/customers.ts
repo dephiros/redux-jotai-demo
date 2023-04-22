@@ -8,6 +8,7 @@ import {
   CustomerActionType,
 } from "../../../interfaces/Customer";
 import { getCustomers } from "../../../api/customer";
+import { Customer } from "../../../models/Customer";
 
 const getInitialState = (): CustomerState => ({
   status: null,
@@ -43,8 +44,8 @@ export function fetchCustomersActionCreator(userId: string) {
       type: CustomerActionType.FETCH_CUSTOMER_START,
     });
     const customers = await getCustomers(userId);
-    // @ts-expect-error: need to figure out thunk type
-    dispatch(updateEntityActionCreator("customers", customers));
+    // @ts-expect-error: thunk is not typed yet
+    dispatch(updateEntityActionCreator(Customer, customers));
     dispatch({
       type: CustomerActionType.FETCH_CUSTOMER_DONE,
       customers,

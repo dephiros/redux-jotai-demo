@@ -6,7 +6,7 @@ import { Customer } from "../../../models/Customer";
 export const getCustomers = createSelector(
   (state: StoreState) => state,
   (state: StoreState): Array<Customer> =>
-    Object.values(state.entities.customers ?? []).map((customer) =>
+    Object.values(state.entities.Customer ?? []).map((customer) =>
       Customer.fromJS(customer)
     )
 );

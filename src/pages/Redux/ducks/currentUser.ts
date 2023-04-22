@@ -5,7 +5,7 @@ import {
   CurrentUserAction,
 } from "../../../interfaces/User";
 import { updateEntityActionCreator } from "../../Redux/ducks/entities";
-import { getUser } from "../../../models/user";
+import { getUser, User } from "../../../models/user";
 
 function getInitialState(): CurrentUserAPIState {
   return {
@@ -40,7 +40,7 @@ export function fetchCurrentUserActionCreator() {
     });
     const user = await getUser();
     // @ts-expect-error: need to figure out thunk type
-    dispatch(updateEntityActionCreator("users", [user]));
+    dispatch(updateEntityActionCreator(User, [user]));
     dispatch({
       type: "fetchUserDone",
       user,

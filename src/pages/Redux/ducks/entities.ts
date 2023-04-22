@@ -1,38 +1,37 @@
 import { Dispatch } from "redux";
+import { Entity, schema } from "@rest-hooks/rest";
+import { normalize } from "@rest-hooks/normalizr";
 
 import type { CurrentUserAPIInterface } from "../../../interfaces/User";
 import type { CustomerAPIInterface } from "../../../interfaces/Customer";
-export interface EntityState {
-  users: Record<string, CurrentUserAPIInterface>;
-  customers: Record<string, CustomerAPIInterface>;
+export interface EntityStore
+  extends Record<string, Record<string, any> | undefined> {
+  User?: Record<string, CurrentUserAPIInterface>;
+  Customer?: Record<string, CustomerAPIInterface>;
 }
 
-function getInitialState(): EntityState {
+function getInitialState(): EntityStore {
   return {
-    users: {},
-    customers: {},
+    User: {},
+    Customer: {},
   };
 }
 
-export function reducer(state = getInitialState(), action: any) {
+type EntityStoreAction = {
+  type: "updateEntity";
+  EntityClass: typeof Entity;
+  resources: Array<any>;
+};
+
+export function reducer(state = getInitialState(), action: EntityStoreAction) {
   // this is done through utility in the real app
   switch (action.type) {
     case "updateEntity": {
-      const entityType = action.entityType;
-      const entities = action.entities;
-      const newState = {
-        ...state,
-        ...{
-          // very naive implementation of normalizing data
-          [entityType]: Object.fromEntries(
-            entities.map((entity: { pk: () => string }) => [
-              entity.pk(),
-              entity,
-            ])
-          ),
-        },
-      };
-      return newState;
+      return normalize<schema.Array<typeof action.EntityClass>, EntityStore>(
+        action.resources,
+        new schema.Array(action.EntityClass),
+        state
+      ).entities;
     }
     default:
       return state;
@@ -40,16 +39,16 @@ export function reducer(state = getInitialState(), action: any) {
 }
 
 export function updateEntityActionCreator(
-  entityType: keyof EntityState,
-  entities: Array<CurrentUserAPIInterface | CustomerAPIInterface>
+  EntityClass: keyof EntityStore,
+  resources: Array<CurrentUserAPIInterface | CustomerAPIInterface>
 ) {
   return async (dispatch: Dispatch) => {
     // we have a utility for this in the real app
     // ignore error for now
     dispatch({
       type: "updateEntity",
-      entityType,
-      entities,
+      EntityClass,
+      resources,
     });
   };
 }

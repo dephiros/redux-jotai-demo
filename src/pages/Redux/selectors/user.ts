@@ -9,7 +9,7 @@ export const getIsCurrentUserLoading = createSelector(
 );
 
 export const getCurrentUser = createSelector(
-  (state: StoreState) => state?.entities?.users?.[0] || undefined,
+  (state: StoreState) => state?.entities?.User?.[0] || undefined,
   (currentUser?: CurrentUserAPIInterface): User | null =>
     currentUser ? User.fromJS(currentUser) : null
 );
