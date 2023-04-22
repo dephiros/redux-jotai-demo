@@ -39,16 +39,7 @@ export function createAPIResourceAtom<
       const resourcePromise = fetchResource(get);
       set(fetchStateAtom, resourcePromise);
       const resources = [await resourcePromise].flat();
-      const entities = get(entityStoreAtom);
-      let newEntities = entities;
-      for (const resource of resources) {
-        newEntities = normalize<typeof EntityClass, EntityStore>(
-          resource,
-          EntityClass,
-          newEntities
-        ).entities;
-      }
-      set(entityStoreAtom, newEntities);
+      set(entityStoreAtom, EntityClass, resources);
     }
   );
   if (shouldFetchOnMount) {

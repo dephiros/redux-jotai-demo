@@ -12,10 +12,7 @@ declare module "./entities" {
 // make atom private by just not expose them
 const _usersAtom = createAPIResourceAtom({
   EntityClass: User,
-  entityKey: "users",
-  fetchResource: async () => {
-    return getUser();
-  },
+  fetchResource: getUser,
 });
 
 export const currentUserAtom = atom(

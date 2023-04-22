@@ -13,7 +13,6 @@ declare module "./entities" {
 
 export const customersAtom = createAPIResourceAtom({
   EntityClass: Customer,
-  entityKey: "customers",
   fetchResource: async (get) => {
     const user = await get(currentUserAtom);
     return getCustomers(user?.id || "");
