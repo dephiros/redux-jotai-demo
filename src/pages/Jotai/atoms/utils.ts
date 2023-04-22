@@ -36,10 +36,11 @@ export function createAPIResourceAtom<
       );
     },
     async (get, set) => {
-      const resourcePromise = fetchResource(get);
+      const resourcePromise = fetchResource(get).then((resources) => {
+        set(entityStoreAtom, EntityClass, [resources].flat());
+        return resources;
+      });
       set(fetchStateAtom, resourcePromise);
-      const resources = [await resourcePromise].flat();
-      set(entityStoreAtom, EntityClass, resources);
     }
   );
   if (shouldFetchOnMount) {
