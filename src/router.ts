@@ -6,7 +6,7 @@ export const ROUTES = new Map([
   [
     "react-props",
     {
-      title: "React Props",
+      title: "Props drilling vs direct subscription",
       component: lazy(() => import("./pages/Props")),
     },
   ],
@@ -31,6 +31,17 @@ const routerAtom = atom(
     return get(getPageAtom);
   }
 );
+
+export const routerLinkAtom = atom((get) => {
+  const activeKey = get(hashAtom);
+  return [...ROUTES.entries()].map(([key, { title }]) => {
+    return {
+      key,
+      title,
+      isActive: key === activeKey,
+    };
+  });
+});
 
 routerAtom.onMount = (setAtom) => {
   console.log("router mounted");

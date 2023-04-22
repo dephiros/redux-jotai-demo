@@ -1,10 +1,9 @@
 import { tw } from "twind";
-import FlashyBox, { getColor } from "./FlashyBox";
-import { useAtomValue } from "jotai";
-import { currentTimeAtom } from "../store";
+import FlashyBox from "./FlashyBox";
+import { Atom, useAtomValue } from "jotai";
 
-export function AtomComponent(): JSX.Element {
-  const value = useAtomValue(currentTimeAtom);
+export function AtomComponent({ atom }: { atom: Atom<string> }): JSX.Element {
+  const value = useAtomValue(atom);
   return (
     <FlashyBox className={tw`p-5 border(blueGray-400 solid 1)`}>
       {value}
@@ -15,22 +14,33 @@ export function AtomComponent(): JSX.Element {
 export function RecursiveComponent({
   value,
   count,
-  max,
+  atom,
 }: {
   value?: string;
   count: number;
   max?: number;
+  atom?: Atom<string>;
 }): JSX.Element {
   const renderValue = () =>
-    value !== undefined ? <>value</> : <AtomComponent />;
+    value !== undefined ? (
+      <>{value}</>
+    ) : atom ? (
+      <AtomComponent atom={atom} />
+    ) : (
+      <></>
+    );
   return count <= 0 ? (
     renderValue()
   ) : (
-    <FlashyBox
-      className={tw`p-5 border(blueGray-400 solid 1)`}
-      color={getColor(count, { max: max || count })}
-    >
-      {<RecursiveComponent value={value} max={count} count={count - 1} />}
+    <FlashyBox className={tw`p-5 border(blueGray-400 solid 1)`}>
+      {
+        <RecursiveComponent
+          value={value}
+          max={count}
+          count={count - 1}
+          atom={atom}
+        />
+      }
     </FlashyBox>
   );
 }
