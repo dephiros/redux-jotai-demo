@@ -1,14 +1,13 @@
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
 
-import { updateEntityActionCreator } from '../../Redux/ducks/entities';
+import { updateEntityActionCreator } from "../../Redux/ducks/entities";
 import {
-  CustomerAPIInterface,
   CustomerState,
   CustomerAction,
   CustomerActionType,
-} from '../../../interfaces/Customer';
-import { getCustomers } from '../../../api/customer';
-import { Customer } from '../../../models/Customer';
+} from "../../../interfaces/Customer";
+import { getCustomers } from "../../../api/customer";
+import { Customer } from "../../../models/Customer";
 
 const getInitialState = (): CustomerState => ({
   status: null,
@@ -23,10 +22,10 @@ export function reducer(
   // this is done through utility in the real app
   switch (action.type) {
     case CustomerActionType.FETCH_CUSTOMER_START: {
-      return { ...state, status: 'loading' };
+      return { ...state, status: "loading" };
     }
     case CustomerActionType.FETCH_CUSTOMER_DONE: {
-      return { ...state, status: 'done', data: action.customers };
+      return { ...state, status: "done", data: action.customers };
     }
     case CustomerActionType.FILTER_CUSTOMER_BY_COUNTRY: {
       return { ...state, countryFilter: action.filter };

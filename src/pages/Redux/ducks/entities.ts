@@ -2,6 +2,8 @@ import { Dispatch } from "redux";
 import { Entity, schema } from "@rest-hooks/rest";
 import { normalize } from "@rest-hooks/normalizr";
 
+import { User } from "../../../models/User";
+import { Customer } from "../../../models/Customer";
 import type { CurrentUserAPIInterface } from "../../../interfaces/User";
 import type { CustomerAPIInterface } from "../../../interfaces/Customer";
 export interface EntityStore
@@ -12,8 +14,8 @@ export interface EntityStore
 
 function getInitialState(): EntityStore {
   return {
-    User: {},
-    Customer: {},
+    [User.key]: {},
+    [Customer.key]: {},
   };
 }
 
