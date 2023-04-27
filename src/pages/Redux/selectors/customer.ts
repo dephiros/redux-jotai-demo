@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import { StoreState } from "../store";
-import { Customer } from "../../../models/customer";
+import { Customer } from "../../../models/Customer";
 
 export const getCustomers = createSelector(
   (state: StoreState) => state,

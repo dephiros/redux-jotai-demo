@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Customer } from "../../../models/customer";
+import { Customer } from "../../../models/Customer";
 import { getCustomers } from "../../../api/customer";
 import { currentUserAtom } from "./currentUser";
 import { CustomerAPIInterface } from "../../../interfaces/Customer";

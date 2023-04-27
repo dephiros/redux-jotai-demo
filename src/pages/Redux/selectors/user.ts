@@ -1,11 +1,11 @@
-import { createSelector } from "reselect";
-import { StoreState } from "../store";
-import { CurrentUserAPIInterface } from "../../../interfaces/User";
-import { User } from "../../../models/user";
+import { createSelector } from 'reselect';
+import { StoreState } from '../store';
+import { CurrentUserAPIInterface } from '../../../interfaces/User';
+import { User } from '../../../models/User';
 
 export const getIsCurrentUserLoading = createSelector(
   (state: StoreState) => state,
-  (state: StoreState) => state?.currentUser.status === "loading"
+  (state: StoreState) => state?.currentUser.status === 'loading'
 );
 
 export const getCurrentUser = createSelector(

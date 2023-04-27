@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { CurrentUserAPIInterface } from "../../../interfaces/User";
-import { getUser, User } from "../../../models/user";
+import { getUser, User } from "../../../models/User";
 import { createAPIResourceAtom } from "./utils";
 
 declare module "./entities" {
