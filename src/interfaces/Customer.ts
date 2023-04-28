@@ -7,17 +7,31 @@ export const CustomerAPISchema = Type.Object({
     }),
   }),
   name: Type.Object({
-    first: Type.String(),
-    last: Type.String(),
+    first: Type.String({
+      faker: "name.fullName",
+    }),
+    last: Type.String({
+      faker: "name.lastName",
+    }),
   }),
   location: Type.Object({
-    city: Type.String(),
-    state: Type.String(),
-    country: Type.String(),
+    city: Type.String({
+      faker: "address.city",
+    }),
+    state: Type.String({
+      faker: "address.state",
+    }),
+    country: Type.String({
+      faker: "address.country",
+    }),
   }),
   picture: Type.Object({
-    thumbnail: Type.String(),
-    medium: Type.String(),
+    thumbnail: Type.String({
+      faker: "image.avatar",
+    }),
+    medium: Type.String({
+      faker: "image.avatar",
+    }),
   }),
 });
 export type CustomerAPIInterface = Static<typeof CustomerAPISchema>;

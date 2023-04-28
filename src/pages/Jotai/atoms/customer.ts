@@ -54,6 +54,7 @@ export function getFilterStateForCountryAtom(country: string) {
 
 export const filteredCustomerByCountryAtom = atom(async (get) => {
   const customers = Object.values((await get(customersAtom)) || {});
+  console.log(customers);
   const filteredCountries = new Set(
     [...get(selectedCountriesAtom)].filter(([k, v]) => v).map(([k, v]) => k)
   );
