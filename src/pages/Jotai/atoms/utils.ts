@@ -41,6 +41,7 @@ export function createAPIResourceAtom<
         return resources;
       });
       set(fetchStateAtom, resourcePromise);
+      return resourcePromise;
     }
   );
   if (shouldFetchOnMount) {

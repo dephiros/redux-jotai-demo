@@ -21,6 +21,7 @@ export const customersAtom = createAPIResourceAtom({
 
 export const customerCountriesAtom = atom(async (get) => {
   const customers = Object.values(await get(customersAtom));
+
   return new Set(customers?.map((customer) => customer.location.country) || []);
 });
 
@@ -54,6 +55,7 @@ export function getFilterStateForCountryAtom(country: string) {
 
 export const filteredCustomerByCountryAtom = atom(async (get) => {
   const customers = Object.values((await get(customersAtom)) || {});
+
   const filteredCountries = new Set(
     [...get(selectedCountriesAtom)].filter(([k, v]) => v).map(([k, v]) => k)
   );
