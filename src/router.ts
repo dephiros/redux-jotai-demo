@@ -12,6 +12,13 @@ export const ROUTES = new Map([
   ],
   ["redux", { title: "Redux", component: lazy(() => import("./pages/Redux")) }],
   ["jotai", { title: "Jotai", component: lazy(() => import("./pages/Jotai")) }],
+  [
+    "batch-multiple-atoms",
+    {
+      title: "Batch multiple atom",
+      component: lazy(() => import("./pages/BatchMultipleAtoms")),
+    },
+  ],
 ]);
 
 type RouteKey<M = typeof ROUTES> = M extends Map<infer K, any> ? K : never;
