@@ -35,7 +35,7 @@ export default function BatchMultipleAtom() {
 
   React.useEffect(() => {
     countRef.current++;
-    alert(countRef.current);
+    console.log(countRef.current);
   });
   return (
     <FlashyBox color={color} duration={1000} className={tw`flex-col`}>
